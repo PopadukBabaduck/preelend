@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Листівка: Послуги ГСЦ</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: url('hp.jpg') center/cover no-repeat fixed;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .flyer-wrap {
+      box-sizing: border-box;
+      width: 860px;
+      min-width: 320px;
+      max-width: 96vw;
+      min-height: 610px;
+      max-height: 96vh;
+      margin: auto;
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 48px 42px 38px 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .flyer-title {
+      text-align: center;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #00cc03;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+    .flyer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 24px 36px;
+      margin-bottom: 22px;
+    }
+    .flyer-step {
+      background: linear-gradient(145deg,#eaf5ff 70%,#f4fafd 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 16px rgba(0,122,204,0.05);
+      padding: 22px 20px 18px 20px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      min-height: 178px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      animation: flyerStepFadeIn 0.7s cubic-bezier(.3,1.3,.7,1) forwards;
+    }
+    .flyer-step.anim-delay-1 { animation-delay: 0.12s;}
+    .flyer-step.anim-delay-2 { animation-delay: 0.24s;}
+    .flyer-step.anim-delay-3 { animation-delay: 0.36s;}
+    .flyer-step.anim-delay-4 { animation-delay: 0.48s;}
+    .flyer-step.anim-delay-5 { animation-delay: 0.60s;}
+    @keyframes flyerStepFadeIn {
+      to { opacity:1; transform: none;}
+    }
+    .flyer-step .icon {
+      position: absolute;
+      right: 16px; top: 18px;
+      font-size: 2.2rem;
+      opacity: 0.17;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+    .flyer-step .num {
+      font-size: 1.18rem;
+      color: #0a9a00;
+      font-weight: bold;
+      margin-bottom: 8px;
+      z-index: 2;
+      position: relative;
+    }
+    .flyer-mini-modal {
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 6px 28px rgba(0, 122, 204, 0.08);
+      border-radius: 15px;
+      padding: 12px 17px 10px 17px;
+      margin: 8px 0 12px 0;
+      font-size: 1.01rem;
+      color: #157ca4;
+      font-weight: 500;
+      z-index: 2;
+      position: relative;
+      transition: box-shadow 0.22s, background 0.22s;
+    }
+    .flyer-mini-modal:hover {
+      background: #e2f6ff;
+      box-shadow: 0 12px 42px rgba(0, 122, 204, 0.18);
+    }
+    .flyer-step ol {
+      padding-left: 17px;
+      margin: 0;
+      color: #34603b;
+      font-size: 0.97rem;
+      z-index: 2;
+      position: relative;
+    }
+    .flyer-step ol li {
+      margin-bottom: 2px;
+    }
+    .flyer-final {
+      grid-column: 1 / 4;
+      text-align: center;
+      margin-top: 7px;
+      padding: 17px 0 0 0;
+    }
+    .flyer-final .icon {
+      font-size: 2rem;
+      color: #28a745;
+      margin-bottom: 2px;
+    }
+    .flyer-final .final-title {
+      color: #14cc00;
+      font-size: 1.14rem;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .flyer-final .final-desc {
+      color: #305b21;
+      font-size: 1.04rem;
+    }
+    @media (max-width: 950px) {
+      .flyer-wrap { width: 98vw; padding: 25px 3vw 19px 3vw; }
+    }
+    @media (max-width: 700px) {
+      .flyer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 17px 12px;
+      }
+      .flyer-final { grid-column: 1 / 3;}
+    }
+@media (max-width: 500px) {
+  .flyer-btn {
+    font-size: 1.1rem;
+    width: 98vw;
+    padding: 14px 0;
+    border-radius: 24px;
+  }
+      .flyer-grid {
+        grid-template-columns: 1fr;
+        gap: 12px 0;
+      }
+      .flyer-final { grid-column: 1 / 2;}
+    }
+    .flyer-wrap { animation: flyerFadeIn 0.7s cubic-bezier(.3,1.3,.7,1) 1;}
+    @keyframes flyerFadeIn {
+      from { opacity:0; transform: translateY(40px);}
+      to { opacity:1; transform: none;}
+    }
+    .flyer-title-fancy {
+  display: inline-block;
+  background: rgba(255,255,255,0.84);
+  border-radius: 25px;
+  padding: 22px 38px 20px 38px;
+  margin: 0 auto 24px auto;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #08ba22;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 48px 0 rgba(38,200,55,0.09), 0 1.5px 6px rgba(0,0,0,0.09);
+  text-align: center;
+  position: relative;
+  animation: titleSlideDown 0.7s cubic-bezier(.29,1.32,.49,1.09) 0.08s backwards, titleWave 2.8s ease-in-out infinite 1.1s;
+  transition: box-shadow 0.22s, background 0.23s, color 0.22s, transform 0.22s;
+  z-index: 10;
+}
+
+@keyframes titleSlideDown {
+  0% { opacity: 0; transform: translateY(-90px) scale(0.96);}
+  85% { opacity: 1; }
+  100% { opacity: 1; transform: none;}
+}
+
+@keyframes titleWave {
+  0%,100% { box-shadow: 0 6px 48px 0 rgba(38,200,55,0.09), 0 1.5px 6px rgba(0,0,0,0.09);}
+  20% { box-shadow: 0 9px 44px 0 rgba(38,200,55,0.19);}
+  50% { box-shadow: 0 16px 56px 0 rgba(38,200,55,0.19);}
+  80% { box-shadow: 0 9px 44px 0 rgba(38,200,55,0.19);}
+}
+
+.flyer-title-fancy:hover {
+  background: #d4f8e3;
+  color: #06a811;
+  box-shadow: 0 18px 62px 0 rgba(35,190,64,0.18), 0 3.5px 9px rgba(0,0,0,0.13);
+  transform: scale(1.045) rotate(-1.2deg);
+  animation: titlePulse 0.5s cubic-bezier(.4,1.7,.6,1) 1;
+}
+
+@keyframes titlePulse {
+  0%   { box-shadow: 0 12px 40px rgba(38,200,55,0.13);}
+  40%  { box-shadow: 0 26px 92px rgba(35,190,64,0.18);}
+  70%  { box-shadow: 0 20px 52px rgba(35,190,64,0.11);}
+  100% { box-shadow: 0 18px 62px 0 rgba(35,190,64,0.18);}
+}
+.flyer-col {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  animation: flyerColFadeIn 1s cubic-bezier(.23,1.27,.37,1) forwards;
+}
+.flyer-col-1 { animation-delay: 0.12s; transform: translateX(-54px) scale(0.97);}
+.flyer-col-2 { animation-delay: 0.32s; }
+.flyer-col-3 { animation-delay: 0.52s; transform: translateX(54px) scale(0.97);}
+@keyframes flyerColFadeIn {
+  to { opacity:1; transform: none;}
+}
+.flyer-btn {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 13px 28px 13px 28px;
+  font-size: 1.11rem;
+  font-weight: 700;
+  color: #fff !important;
+  background: linear-gradient(95deg, #1fd246 65%, #0093e9 100%);
+  border: none;
+  border-radius: 29px;
+  box-shadow: 0 8px 26px rgba(31, 210, 70, 0.09), 0 2px 7px rgba(0,0,0,0.08);
+  transition: background 0.22s, box-shadow 0.22s, transform 0.18s;
+  text-decoration: none !important;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  text-align: center;
+  animation: flyerBtnFadeIn 0.7s cubic-bezier(.35,1.4,.6,1) 0.85s backwards;
+}
+.flyer-btn:hover, .flyer-btn:focus {
+  background: linear-gradient(85deg, #0093e9 55%, #1fd246 100%);
+  box-shadow: 0 15px 36px rgba(31, 210, 70, 0.21), 0 4px 12px rgba(0,0,0,0.16);
+  transform: scale(1.055);
+}
+@keyframes flyerBtnFadeIn {
+  0% { opacity: 0; transform: translateY(40px) scale(0.93);}
+  100% { opacity: 1; transform: none;}
+}
+/* --- АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ --- */
+@media (max-width: 950px) {
+  .flyer-wrap { 
+    width: 100vw; 
+    min-width: 0; 
+    padding: 13px 1vw 10px 1vw; 
+    box-shadow: none;
+  }
+  .flyer-title-fancy { 
+    font-size: 1.35rem; 
+    padding: 14px 2vw; 
+    margin-bottom: 15px; 
+    border-radius: 20px;
+  }
+}
+@media (max-width: 700px) {
+  .flyer-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px 0;
+  }
+  .flyer-col { width: 100%; }
+  .flyer-title-fancy { 
+    font-size: 1.09rem; 
+    padding: 10px 4vw; 
+    border-radius: 18px;
+  }
+  .flyer-step, .flyer-mini-modal { font-size: 0.99rem;}
+  .flyer-btn { width: 96vw; max-width: 430px; padding: 13px 0; font-size: 1.04rem;}
+}
+@media (max-width: 500px) {
+  .flyer-btn {
+    font-size: 1.1rem;
+    width: 98vw;
+    padding: 14px 0;
+    border-radius: 24px;
+  }
+  .flyer-title-fancy { 
+    font-size: 0.97rem; 
+    padding: 8px 2vw; 
+    border-radius: 13px;
+  }
+  .flyer-step, .flyer-mini-modal { font-size: 0.95rem;}
+  .flyer-btn { width: 99vw; font-size: 0.98rem;}
+}
+
+  </style>
+</head>
+<body>
+  <div class="flyer-wrap">
+    <div class="flyer-title-fancy">Карта отримання та відновлення посвідчень</div>
+    <div class="flyer-grid">
+      <!-- Колонка 1 -->
+      <div class="flyer-col flyer-col-1">
+        <div class="flyer-step">
+          <span class="icon"></span>
+          <div class="num">1. Первинне отримання</div>
+          <div class="flyer-mini-modal">Ваш перший документ — посвідчення строком на 2 роки.</div>
+          <ol>
+            <li>Збір і перевірка пакета документів (паспорт, фото, медична довідка).</li>
+            <li>Подання заявки до ЦНАП або онлайн.</li>
+            <li>Оплата за роботу тільки після отримання посвідчення </li>
+            <li>Отримання першого посвідчення.</li>
+          </ol>
+        </div>
+        <div class="flyer-step">
+          <span class="icon"></span>
+          <div class="num">4. Заміна посвідчення</div>
+          <div class="flyer-mini-modal">Якщо термін дії завершується або документ загублено.</div>
+          <ol>
+            <li>Заповнення заяви про заміну чи втрату.</li>
+            <li>Додавання копій паспорта та, за потреби, довідки про втрату.</li>
+            <li>Сплата мита та подача документів.</li>
+            <li>Отримання відновленого або оновленого посвідчення.</li>
+          </ol>
+        </div>
+      </div>
+      <!-- Колонка 2 -->
+      <div class="flyer-col flyer-col-2">
+        <div class="flyer-step">
+          <span class="icon"></span>
+          <div class="num">2. Відновлення за 130-ї статті</div>
+          <div class="flyer-mini-modal">Повне зняття обмежень після судимих вироків чи адміністративних стягнень.</div>
+          <ol>
+            <li>Підготовка рішення суду або довідки про виконання покарання.</li>
+            <li>Подання документів на відновлення.</li>
+            <li>Очікування завершення перевірки (зазвичай до 30 днів) у нас до 12 робочих днів .</li>
+            <li>Отримання підтвердження зняття обмежень.</li>
+          </ol>
+        </div>
+        <div class="flyer-step">
+          <span class="icon"></span>
+          <div class="num">5. Скасування обмежень</div>
+          <div class="flyer-mini-modal">Усунення будь-яких адміністративних обмежень після закінчення терміну чи рішення суду.</div>
+          <ol>
+            <li>Збір рішення суду про завершення терміну обмежень.</li>
+            <li>Подання документів до органу, що накладав обмеження.</li>
+            <li>Очікування офіційного акту про їх скасування.</li>
+            <li>Отримання довідки про повне зняття обмежень.</li>
+          </ol>
+        </div>
+      </div>
+      <!-- Колонка 3 -->
+      <div class="flyer-col flyer-col-3">
+        <div class="flyer-step">
+          <span class="icon"></span>
+          <div class="num">3. Заміна на 30 років</div>
+          <div class="flyer-mini-modal">Отримання постійного посвідчення терміном на 30 років.</div>
+          <ol>
+            <li>Підготовка документів (старе посвідчення, паспорт, фото).</li>
+            <li>Сплата мита за заміну.</li>
+            <li>Подача і розгляд заявки (5–7 днів).</li>
+            <li>Видача нового «довічного» посвідчення.</li>
+          </ol>
+        </div>
+        <div class="flyer-final">
+          <div class="icon"></div>
+        <a class="flyer-btn" href="https://t.me/Tolik_tsc" target="_blank" rel="noopener">Отримати консультацію</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
